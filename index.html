@@ -286,6 +286,72 @@ body.theme-white{--acc:#ffffff;--acc2:#e2e8f0;--glow:rgba(255,255,255,.4);--blue
 #train{position:absolute;right:28px;width:34px;height:34px;font-size:24px;display:flex;align-items:center;justify-content:center;transition:top .8s linear;z-index:10;animation:tpulse 2s ease-in-out infinite;top:0;}
 @keyframes tpulse{0%,100%{filter:drop-shadow(0 0 8px var(--glow))}50%{filter:drop-shadow(0 0 20px var(--glow))}}
 #track-content{position:relative;}
+
+/* ══ SMOKE ══ */
+.smoke-wrap{position:absolute;right:28px;width:34px;pointer-events:none;z-index:9;}
+.smoke{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);animation:smokerise 1.8s ease-out forwards;}
+@keyframes smokerise{0%{transform:translateY(0) scale(1);opacity:.5;}100%{transform:translateY(-36px) translateX(-8px) scale(2.5);opacity:0;}}
+
+/* ══ COCKPIT MODAL ══ */
+#cockpit-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);z-index:500;display:none;align-items:flex-end;justify-content:center;}
+#cockpit-overlay.open{display:flex;}
+.cockpit-modal{width:100%;max-width:460px;background:var(--modal-bg);border-radius:28px 28px 0 0;padding:24px 22px 48px;border-top:1px solid var(--card-b);}
+.cockpit-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.cockpit-title{font-size:16px;font-weight:900;display:flex;align-items:center;gap:8px;}
+.cockpit-close{background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer;padding:4px 8px;}
+.cockpit-speed{display:flex;align-items:center;justify-content:center;margin-bottom:22px;}
+.speed-ring{position:relative;width:140px;height:140px;}
+.speed-ring svg{position:absolute;inset:0;transform:rotate(-90deg);}
+.speed-ring-bg{fill:none;stroke:rgba(255,255,255,.06);stroke-width:10;}
+.speed-ring-fill{fill:none;stroke:url(#spgrad);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .8s ease;}
+.speed-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.speed-pct{font-size:32px;font-weight:900;background:linear-gradient(135deg,var(--acc),var(--acc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.speed-label{font-size:11px;color:var(--text2);font-weight:700;}
+.cockpit-next{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(245,158,11,.04));border:1px solid rgba(245,158,11,.3);border-radius:16px;padding:16px;margin-bottom:12px;}
+.cockpit-next-label{font-size:10px;color:var(--acc);font-weight:700;letter-spacing:2px;margin-bottom:6px;}
+.cockpit-next-name{font-size:18px;font-weight:900;}
+.cockpit-next-cd{font-size:28px;font-weight:900;color:var(--acc);letter-spacing:-1px;margin-top:4px;}
+.cockpit-tasks{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+.cockpit-task-row{background:var(--card);border:1px solid var(--card-b);border-radius:12px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;}
+.cockpit-task-row.done-row{opacity:.45;}
+.cockpit-task-name{font-size:14px;font-weight:700;}
+.cockpit-task-time{font-size:12px;color:var(--acc);font-weight:700;}
+.cockpit-section-label{font-size:10px;color:var(--text3);letter-spacing:2px;font-weight:700;margin:16px 0 8px;}
+
+/* ══ MAP MODAL ══ */
+#map-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);z-index:500;display:none;align-items:flex-end;justify-content:center;}
+#map-overlay.open{display:flex;}
+.map-modal{width:100%;max-width:460px;background:var(--modal-bg);border-radius:28px 28px 0 0;padding:24px 22px 48px;border-top:1px solid var(--card-b);max-height:88vh;overflow-y:auto;}
+.map-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.map-title-txt{font-size:16px;font-weight:900;}
+.map-close{background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer;padding:4px 8px;}
+.map-track{position:relative;padding-right:54px;}
+.map-line{position:absolute;right:17px;top:0;bottom:0;width:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+.map-line-done{position:absolute;right:17px;top:0;width:3px;background:linear-gradient(180deg,var(--green),#059669);border-radius:2px;transition:height .6s ease;}
+.map-train-icon{position:absolute;right:6px;font-size:20px;transition:top .6s ease;z-index:3;}
+.map-stop{position:relative;padding:10px 0;}
+.map-dot{position:absolute;right:7px;top:50%;transform:translate(50%,-50%);width:22px;height:22px;border-radius:50%;border:3px solid rgba(255,255,255,.15);background:var(--modal-bg);display:flex;align-items:center;justify-content:center;font-size:12px;z-index:2;transition:.3s;}
+.map-dot.done-dot{background:var(--green);border-color:var(--green);}
+.map-dot.current-dot{background:var(--acc);border-color:var(--acc);box-shadow:0 0 14px var(--glow);animation:tpulse 1.5s ease-in-out infinite;}
+.map-card{background:var(--card);border:1px solid var(--card-b);border-radius:12px;padding:10px 14px;transition:.3s;}
+.map-card.current-card{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.35);}
+.map-stop-name{font-size:14px;font-weight:800;}
+.map-stop-time{font-size:11px;color:var(--text3);margin-top:1px;}
+.map-stop-tasks{font-size:11px;color:var(--blue);margin-top:3px;font-weight:600;}
+
+/* ══ STREAK ══ */
+.streak-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.28);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:800;color:var(--acc);cursor:pointer;margin-right:6px;}
+
+/* ══ CELEBRATION ══ */
+#celebration{position:fixed;inset:0;z-index:600;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.9);backdrop-filter:blur(18px);}
+#celebration.open{display:flex;}
+.celeb-train{font-size:80px;animation:celebtrain .8s cubic-bezier(.17,.67,.35,1.2);}
+@keyframes celebtrain{0%{transform:translateX(-300px) scale(.5);opacity:0;}80%{transform:translateX(10px) scale(1.08);}100%{transform:translateX(0) scale(1);opacity:1;}}
+.celeb-title{font-size:26px;font-weight:900;margin:16px 0 6px;background:linear-gradient(135deg,var(--acc),var(--acc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;}
+.celeb-sub{font-size:14px;color:var(--text2);margin-bottom:10px;text-align:center;padding:0 20px;}
+.celeb-streak{font-size:20px;font-weight:900;color:var(--acc);margin-bottom:28px;}
+.celeb-close{padding:14px 36px;border-radius:20px;background:linear-gradient(135deg,var(--acc),var(--acc2));border:none;color:#0a0e1a;font-size:16px;font-weight:900;cursor:pointer;}
+#confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:601;}
 .ps{position:relative;padding:18px 62px 18px 0;}
 .ps-dot{position:absolute;right:34px;top:50%;transform:translate(50%,-50%);width:20px;height:20px;border-radius:50%;background:var(--acc);border:3px solid transparent;box-shadow:0 0 16px var(--glow),0 0 32px var(--glow);z-index:5;}
 .ps.done .ps-dot{background:var(--green);box-shadow:0 0 14px rgba(16,185,129,.5);}
@@ -344,6 +410,11 @@ body.theme-white{--acc:#ffffff;--acc2:#e2e8f0;--glow:rgba(255,255,255,.4);--blue
 .mf-sel{width:100%;background:var(--modal-bg);border:1px solid var(--card-b);border-radius:10px;color:var(--text);font-size:14px;padding:11px 13px;outline:none;}
 .mf-sel option{background:var(--modal-bg);}
 .seg-hint{font-size:11px;color:var(--acc);font-weight:700;margin-top:6px;padding:6px 10px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.18);display:none;}
+.date-tabs{display:flex;gap:7px;margin-bottom:0;}
+.date-tab{flex:1;padding:9px 6px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;text-align:center;background:var(--card);border:1px solid var(--card-b);color:var(--text2);transition:.18s;}
+.date-tab.sel{background:rgba(56,189,248,.15);border-color:rgba(56,189,248,.5);color:var(--blue);}
+.date-custom-wrap{margin-top:8px;display:none;}
+.date-custom-inp{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--card-b);border-radius:10px;color:var(--text);font-size:15px;padding:11px 13px;outline:none;}
 .mrow{display:flex;gap:10px;}.mrow .mf{flex:1;}
 .m-actions{display:flex;gap:10px;margin-top:16px;}
 .m-cancel{flex:1;padding:13px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--card-b);color:#9ca3af;font-size:14px;font-weight:700;cursor:pointer;}
@@ -504,9 +575,13 @@ body.theme-white{--acc:#ffffff;--acc2:#e2e8f0;--glow:rgba(255,255,255,.4);--blue
 <!-- MAIN -->
 <div id="main">
   <div class="topbar">
-    <div><div class="tb-date" id="tb-date"></div></div>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div class="tb-date" id="tb-date"></div>
+      <div class="streak-badge" id="streak-badge" onclick="openCockpit()" title="أيام متتالية">🔥 <span id="streak-count">0</span></div>
+    </div>
     <div class="tb-clock" id="tb-clock"></div>
     <div style="display:flex;gap:8px;">
+      <button class="tb-btn" onclick="openMapModal()">🗺️</button>
       <button class="tb-btn" onclick="openTheme()">🎨</button>
       <button class="tb-btn" onclick="goSetup()">⚙️</button>
     </div>
@@ -536,7 +611,8 @@ body.theme-white{--acc:#ffffff;--acc2:#e2e8f0;--glow:rgba(255,255,255,.4);--blue
   <div class="track-wrap" style="flex:1;">
     <div class="track-line"></div>
     <div class="track-done" id="track-done"></div>
-    <div id="train">🚂</div>
+    <div id="smoke-wrap" class="smoke-wrap"></div>
+    <div id="train" onclick="openCockpit()" title="كوكبيت القطار">🚂</div>
     <div id="track-content"></div>
   </div>
   <div class="fab">
@@ -551,6 +627,17 @@ body.theme-white{--acc:#ffffff;--acc2:#e2e8f0;--glow:rgba(255,255,255,.4);--blue
     <div class="modal-handle"></div>
     <div class="modal-title">➕ مهمة جديدة</div>
     <div class="mf"><div class="mf-label">اسم المهمة</div><input class="mf-inp" type="text" id="m-name" placeholder="مثال: مذاكرة رياضيات"/></div>
+    <div class="mf">
+      <div class="mf-label">📅 تاريخ المهمة</div>
+      <div class="date-tabs">
+        <div class="date-tab sel" id="dt-today" onclick="setDateTab('today')">اليوم</div>
+        <div class="date-tab" id="dt-tomorrow" onclick="setDateTab('tomorrow')">بكرا</div>
+        <div class="date-tab" id="dt-custom" onclick="setDateTab('custom')">تاريخ محدد</div>
+      </div>
+      <div class="date-custom-wrap" id="date-custom-wrap">
+        <input class="date-custom-inp" type="date" id="m-date-custom"/>
+      </div>
+    </div>
     <div class="mf">
       <div class="mf-label">في الفترة</div>
       <select class="mf-sel" id="m-seg" onchange="onSegChange()"></select>
@@ -747,9 +834,14 @@ function loadState(){
     const raw=localStorage.getItem(SKEY);if(!raw)return;
     const d=JSON.parse(raw),today=todayKey();
     if(localStorage.getItem(DKEY)!==today){
-      // يوم جديد: امسح المهام المؤقتة وابقي المثبتة
+      // يوم جديد: امسح بس مهام اليوم السابق المؤقتة، وابقي المثبتة والمهام المستقبلية
+      const prevDay=localStorage.getItem(DKEY);
       const pinned=(d.pinnedTasks||[]);
-      d.tasks=pinned.map(t=>({...t,id:Date.now().toString()+Math.random(),done:false}));
+      // المهام المستقبلية = اللي تاريخها مش اليوم السابق (يعني لسه قادمة)
+      const futureTasks=(d.tasks||[]).filter(t=>t.taskDate&&t.taskDate!==prevDay&&t.taskDate!==today);
+      // مهام اليوم الجديد من المثبتة
+      const pinnedToday=pinned.map(t=>({...t,id:Date.now().toString()+Math.random(),done:false,taskDate:today}));
+      d.tasks=[...pinnedToday,...futureTasks];
       d.prayersDone={};
       localStorage.setItem(DKEY,today);
       localStorage.setItem(SKEY,JSON.stringify(d));
@@ -840,7 +932,13 @@ function tick(){
   el('np-name').textContent=nx.emoji+' '+nx.name;el('np-cd').textContent=toHMS(diff);
   updateTrain();
 }
-function updateTrain(){const tc=el('track-content');if(!tc)return;const h=tc.scrollHeight,r=Math.min(1,nowMins()/1440),top=Math.round(r*h);el('track-done').style.height=top+'px';el('train').style.top=(top-16)+'px';}
+function updateTrain(){
+  const tc=el('track-content');if(!tc)return;
+  const h=tc.scrollHeight,r=Math.min(1,nowMins()/1440),top=Math.round(r*h);
+  el('track-done').style.height=top+'px';
+  el('train').style.top=(top-16)+'px';
+  el('smoke-wrap').style.top=(top-20)+'px';
+}
 
 /* ══ STATS ══ */
 function updateStats(){
@@ -868,19 +966,50 @@ function renderTrack(){
   const qMins=toMins(qTime);
   const qDone=!!STATE.prayersDone[QIYAM_KEY];
 
+  const today=new Date().toDateString();
   const addSeg=(from,to,label)=>{
-    const tasks=STATE.tasks.filter(t=>toMins(t.from)>=from&&toMins(t.from)<to).sort((a,b)=>toMins(a.from)-toMins(b.from));
+    // اعرض مهام اليوم + المستقبلية في نفس الفترة
+    const tasks=STATE.tasks.filter(t=>{
+      return toMins(t.from)>=from&&toMins(t.from)<to;
+    }).sort((a,b)=>{
+      // رتّب: اليوم أولاً، بعدين المستقبلية حسب التاريخ
+      const da=new Date(a.taskDate||today), db=new Date(b.taskDate||today);
+      if(da-db!==0) return da-db;
+      return toMins(a.from)-toMins(b.from);
+    });
     const div=document.createElement('div');div.className='seg';
     let html='<div class="seg-label">'+label+'</div>';
     tasks.forEach(t=>{
-      const fm=toMins(t.from),tm=toMins(t.to),isNow=now>=fm&&now<tm&&!t.done,isDone=t.done||now>=tm;
+      const fm=toMins(t.from),tm=toMins(t.to);
+      const tDate=t.taskDate||today;
+      const isFuture=tDate!==today;
+      const isNow=!isFuture&&now>=fm&&now<tm&&!t.done;
+      const isDone=t.done;
       const isPinned=!!pinned.find(p=>p.name===t.name&&p.from===t.from&&p.to===t.to);
+
+      // label التاريخ للمهام المستقبلية
+      let dateLabel='';
+      if(isFuture){
+        const d=new Date(tDate);
+        const diffDays=Math.round((d-new Date(today))/(1000*60*60*24));
+        const dayName=d.toLocaleDateString('ar-EG',{weekday:'long'});
+        const shortDate=d.toLocaleDateString('ar-EG',{day:'numeric',month:'short'});
+        const whenStr=diffDays===1?'بكرا':diffDays===2?'بعد يومين':dayName;
+        dateLabel='<div style="font-size:10px;color:var(--blue);font-weight:700;margin-top:2px;">📅 '+whenStr+' · '+shortDate+'</div>';
+      }
+
+      const cardStyle=isFuture?'background:rgba(56,189,248,.05);border-color:rgba(56,189,248,.18);opacity:0.85;':'';
+      const checkStyle=isFuture?'border-color:rgba(56,189,248,.5);':'';
+
       html+='<div class="ts'+(isDone?' done':'')+(isNow?' now':'')+'" onclick="toggleTask(\''+t.id+'\')">'+
-        '<div class="ts-card"><div class="ts-right">'+
-        '<div class="ts-check"></div>'+
-        '<div><div class="ts-name">'+(isPinned?'📌 ':'')+esc(t.name)+'</div><div class="ts-range">'+fmt12(t.from)+' ← '+fmt12(t.to)+'</div></div></div>'+
+        '<div class="ts-card" style="'+cardStyle+'"><div class="ts-right">'+
+        '<div class="ts-check" style="'+checkStyle+'"></div>'+
+        '<div><div class="ts-name">'+(isPinned?'📌 ':'')+esc(t.name)+'</div>'+
+        '<div class="ts-range"'+(isFuture?' style="color:var(--blue);"':'')+'>'+fmt12(t.from)+' ← '+fmt12(t.to)+'</div>'+
+        dateLabel+
+        '</div></div>'+
         '<div class="ts-actions">'+
-        '<div class="ts-timer-btn" onclick="event.stopPropagation();openTimer(\''+t.id+'\')" title="تايمر">⏱</div>'+
+        (isFuture?'':'<div class="ts-timer-btn" onclick="event.stopPropagation();openTimer(\''+t.id+'\')" title="تايمر">⏱</div>')+
         '<div class="ts-pin'+(isPinned?' active':'')+'" onclick="event.stopPropagation();togglePinTask(\''+t.id+'\')">'+(isPinned?'📌':'📍')+'</div>'+
         '<div class="ts-del" onclick="event.stopPropagation();deleteTask(\''+t.id+'\')">🗑</div>'+
         '</div></div></div>';
@@ -916,14 +1045,21 @@ function renderTrack(){
   } else {
     addQiyam();
   }
-  pr.forEach((p,i)=>{addPrayer(p);addSeg(p.mins,i+1<pr.length?pr[i+1].mins:1440,'بعد '+p.name);});
+  pr.forEach((p,i)=>{
+    addPrayer(p);
+    if(p.key==='isha'){
+      addSeg(p.mins,1440,'🌙 بعد العشاء');
+    } else {
+      addSeg(p.mins,i+1<pr.length?pr[i+1].mins:toMins(STATE.prayerTimes['isha']),'بعد '+p.name);
+    }
+  });
   updateTrain();updateStats();
 }
 
 /* ══ ACTIONS ══ */
-function markPrayer(key){STATE.prayersDone[key]=true;saveState();renderTrack();}
+function markPrayer(key){STATE.prayersDone[key]=true;saveState();renderTrack();checkCelebration();}
 function markQiyam(){STATE.prayersDone[QIYAM_KEY]=true;saveState();renderTrack();}
-function toggleTask(id){const t=STATE.tasks.find(t=>t.id===id);if(t)t.done=!t.done;saveState();renderTrack();}
+function toggleTask(id){const t=STATE.tasks.find(t=>t.id===id);if(t)t.done=!t.done;saveState();renderTrack();checkCelebration();}
 function deleteTask(id){
   const t=STATE.tasks.find(t=>t.id===id);
   if(t){// لو كانت مثبتة، امسحها من المثبتة كمان
@@ -945,11 +1081,14 @@ function togglePinTask(id){
 /* حساب الـ range بتاع كل فترة */
 function getSegRange(segVal){
   const pr=getPrayers();
+  const fajrMins=pr[0].mins;
   if(segVal.startsWith('before_')){
-    // قبل الفجر: من منتصف الليل لحد الفجر
-    return {fromMins:0, toMins:pr[0].mins, fromStr:'00:00', toStr:STATE.prayerTimes[pr[0].key]};
+    return {fromMins:0, toMins:fajrMins, fromStr:'00:00', toStr:STATE.prayerTimes[pr[0].key]};
   }
   const key=segVal.replace('after_','');
+  if(key==='isha'){
+    return {fromMins:toMins(STATE.prayerTimes['isha']), toMins:1439, fromStr:STATE.prayerTimes['isha'], toStr:'23:59'};
+  }
   const idx=pr.findIndex(p=>p.key===key);
   const start=pr[idx];
   const end=idx+1<pr.length?pr[idx+1]:null;
@@ -961,19 +1100,20 @@ function getSegRange(segVal){
 /* لما تغير الفترة */
 function onSegChange(){
   const seg=el('m-seg').value;
-  const {fromStr,toStr,fromMins,toMins}=getSegRange(seg);
-  // حدد أقرب وقت حالي داخل الفترة كـ default "من"
+  const segR=getSegRange(seg);
+  const fromM=segR.fromMins, toM=segR.toMins;
+  const fromStr=segR.fromStr, toStr=segR.toStr;
   const now=nowMins();
-  let defaultFrom=fromMins;
-  if(now>fromMins && now<toMins) defaultFrom=Math.ceil(now/5)*5; // قرّب لأقرب 5 دقايق
-  const df=defaultFrom>=toMins?fromMins:defaultFrom;
-  const dt=Math.min(df+60,toMins); // ساعة بعده أو نهاية الفترة
-  const pad=n=>String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');
+  // pad بيعمل HH:MM مع wrap للـ 1440+
+  const pad=n=>{const x=Math.round(n)%1440;return String(Math.floor(x/60)).padStart(2,'0')+':'+String(x%60).padStart(2,'0');};
+  let defaultFrom=fromM;
+  if(now>fromM && now<toM) defaultFrom=Math.ceil(now/5)*5;
+  const df=defaultFrom>=toM?fromM:defaultFrom;
+  const dt=Math.min(df+60,toM);
   el('m-from').value=pad(df);
   el('m-to').value=pad(dt);
   el('m-from').min=fromStr; el('m-from').max=toStr;
   el('m-to').min=fromStr;   el('m-to').max=toStr;
-  // hint
   const hint=el('seg-hint');
   hint.textContent='⏱ الفترة المتاحة: '+fmt12(fromStr)+' ← '+fmt12(toStr);
   hint.style.display='block';
@@ -982,6 +1122,7 @@ function onSegChange(){
 function openModal(){
   el('m-name').value='';
   _pinModal=false;updatePinToggleUI();
+  setDateTab('today');
   const pr=getPrayers(),sel=el('m-seg');
   sel.innerHTML='';
   const o=document.createElement('option');
@@ -989,7 +1130,11 @@ function openModal(){
   pr.forEach((p,i)=>{
     const op=document.createElement('option');
     op.value='after_'+p.key;
-    op.textContent='بعد '+p.name+' — قبل '+(i+1<pr.length?pr[i+1].name:'منتصف الليل');
+    if(p.key==='isha'){
+      op.textContent='بعد العشاء — قبل الفجر';
+    } else {
+      op.textContent='بعد '+p.name+' — قبل '+(i+1<pr.length?pr[i+1].name:'الفجر');
+    }
     sel.appendChild(op);
   });
   const now=nowMins();
@@ -1003,6 +1148,32 @@ function openModal(){
 }
 
 let _pinModal=false;
+let _selectedDate='today'; // 'today', 'tomorrow', or 'YYYY-MM-DD'
+
+function setDateTab(tab){
+  _selectedDate=tab;
+  ['today','tomorrow','custom'].forEach(t=>{
+    el('dt-'+t).classList.toggle('sel',t===tab);
+  });
+  el('date-custom-wrap').style.display=(tab==='custom')?'block':'none';
+  if(tab==='custom'){
+    const d=new Date();
+    d.setDate(d.getDate()+1);
+    el('m-date-custom').value=d.toISOString().slice(0,10);
+    el('m-date-custom').min=new Date().toISOString().slice(0,10);
+  }
+}
+
+function getSelectedDateStr(){
+  if(_selectedDate==='today') return new Date().toDateString();
+  if(_selectedDate==='tomorrow'){const d=new Date();d.setDate(d.getDate()+1);return d.toDateString();}
+  if(_selectedDate==='custom'){
+    const v=el('m-date-custom').value;
+    return v?new Date(v).toDateString():new Date().toDateString();
+  }
+  return new Date().toDateString();
+}
+
 function togglePin(){
   _pinModal=!_pinModal;updatePinToggleUI();
 }
@@ -1026,15 +1197,17 @@ function overlayClick(e){if(e.target===el('overlay'))closeModal();}
 function saveTask(){
   const name=el('m-name').value.trim(),from=el('m-from').value,to=el('m-to').value;
   if(!name||!from||!to)return;
-  const {fromMins,toMins}=getSegRange(el('m-seg').value);
+  const segRange=getSegRange(el('m-seg').value);
   const fm=toMins_(from),tm=toMins_(to);
-  if(fm<fromMins||tm>toMins||fm>=tm){
-    el('seg-hint').textContent='⚠️ الوقت خارج نطاق الفترة!';
+  if(fm>=tm){
+    el('seg-hint').textContent='⚠️ وقت البداية لازم يكون قبل النهاية!';
     el('seg-hint').style.color='#f87171';
+    el('seg-hint').style.display='block';
     setTimeout(()=>{el('seg-hint').style.color='';onSegChange();},1800);
     return;
   }
-  const task={id:Date.now().toString(),name,from,to,segment:el('m-seg').value,done:false};
+  const taskDate=getSelectedDateStr();
+  const task={id:Date.now().toString(),name,from,to,segment:el('m-seg').value,done:false,taskDate};
   STATE.tasks.push(task);
   if(_pinModal){
     if(!STATE.pinnedTasks)STATE.pinnedTasks=[];
@@ -1100,11 +1273,479 @@ function closeTimer(){
 }
 function timerOverlayClick(e){if(e.target===el('timer-overlay'))closeTimer();}
 
+/* ══ SMOKE ══ */
+let _smokeInterval=null;
+function startSmoke(){
+  if(_smokeInterval)return;
+  _smokeInterval=setInterval(()=>{
+    const wrap=el('smoke-wrap');
+    if(!wrap)return;
+    const trainTop=parseInt(el('train').style.top||'0');
+    wrap.style.top=(trainTop-4)+'px';
+    const s=document.createElement('div');
+    s.className='smoke';
+    s.style.right=(Math.random()*10+2)+'px';
+    s.style.animationDuration=(1.2+Math.random()*.8)+'s';
+    s.style.animationDelay=(Math.random()*.3)+'s';
+    wrap.appendChild(s);
+    setTimeout(()=>s.remove(),2200);
+  },600);
+}
+function stopSmoke(){if(_smokeInterval){clearInterval(_smokeInterval);_smokeInterval=null;}}
+
+/* ══ STREAK ══ */
+function getStreak(){
+  try{
+    const raw=localStorage.getItem('mahatat_streak');
+    return raw?JSON.parse(raw):{count:0,lastDay:''};
+  }catch(e){return{count:0,lastDay:''};}
+}
+function saveStreak(s){localStorage.setItem('mahatat_streak',JSON.stringify(s));}
+function checkAndUpdateStreak(){
+  const today=todayKey();
+  const s=getStreak();
+  // لو اليوم اتسجّل خلاص
+  if(s.lastDay===today)return s.count;
+  // تحقق لو كمّل كل حاجة
+  const total=STATE.tasks.filter(t=>(t.taskDate||today)===today).length;
+  const done=STATE.tasks.filter(t=>(t.taskDate||today)===today&&t.done).length;
+  const prayers=Object.keys(STATE.prayersDone).filter(k=>STATE.prayersDone[k]).length;
+  if(total>0&&done===total&&prayers>=5){
+    // يوم كامل!
+    const yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);
+    const wasYesterday=s.lastDay===yesterday.toDateString();
+    s.count=wasYesterday?s.count+1:1;
+    s.lastDay=today;
+    saveStreak(s);
+    return s.count;
+  }
+  return s.count;
+}
+function updateStreakBadge(){
+  const s=getStreak();
+  const badge=el('streak-count');
+  if(badge)badge.textContent=s.count;
+}
+
+/* ══ COCKPIT / CABIN ══ */
+let _cockpitInterval=null, _cabinAnim=null, _cabinOffset=0;
+
+const TERRAIN_ZONES=[
+  {type:'desert', color:'#c2884a', accent:'#e8a855'},
+  {type:'forest', color:'#1a6b2f', accent:'#2d9e4a'},
+  {type:'mountain', color:'#4a5568', accent:'#718096'},
+  {type:'plains', color:'#4a7c3f', accent:'#6ab04c'},
+  {type:'tunnel', color:'#0d1117', accent:'#1a2332'},
+  {type:'city', color:'#2d3748', accent:'#4a5568'},
+];
+
+function openCockpit(){
+  el('cockpit-overlay').style.display='flex';
+  startCabinAnimation();
+  renderCockpit();
+  _cockpitInterval=setInterval(renderCockpit,1000);
+}
+function closeCockpit(){
+  el('cockpit-overlay').style.display='none';
+  if(_cockpitInterval){clearInterval(_cockpitInterval);_cockpitInterval=null;}
+  if(_cabinAnim){cancelAnimationFrame(_cabinAnim);_cabinAnim=null;}
+}
+
+function startCabinAnimation(){
+  const canvas=el('cabin-canvas');
+  if(!canvas)return;
+  const dpr=window.devicePixelRatio||1;
+  canvas.width=canvas.offsetWidth*dpr||400*dpr;
+  canvas.height=canvas.offsetHeight*dpr||220*dpr;
+  const ctx=canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+  const W=canvas.width/dpr, H=canvas.height/dpr;
+
+  // pick terrain zone based on time of day
+  const hr=new Date().getHours();
+  let zoneName = hr>=5&&hr<12?'plains': hr>=12&&hr<15?'desert': hr>=15&&hr<18?'forest': hr>=18&&hr<20?'city':'tunnel';
+  const zone=TERRAIN_ZONES.find(z=>z.type===zoneName)||TERRAIN_ZONES[0];
+  const isDark=hr>=20||hr<5;
+  const skyTop=isDark?'#020818':hr>=18?'#1a0a2e':hr>=16?'#ff7043':'#1a6bb5';
+  const skyBot=isDark?'#0a1628':hr>=18?'#4a1a6b':hr>=16?'#ffb74d':'#64b5f6';
+
+  // generate static landscape elements
+  const trees=Array.from({length:18},(_,i)=>({
+    x:i*(W/8)+Math.random()*30, baseY:H*0.62+Math.random()*20,
+    h:20+Math.random()*30, type:Math.random()>.5?'pine':'round'
+  }));
+  const mountains=Array.from({length:5},(_,i)=>({
+    x:i*(W/3)+Math.random()*40, h:H*0.15+Math.random()*H*.2
+  }));
+  const buildings=zoneName==='city'?Array.from({length:10},(_,i)=>({
+    x:i*(W/5)+Math.random()*20, w:15+Math.random()*25, h:30+Math.random()*60
+  })):[];
+  // stars for night
+  const stars=isDark?Array.from({length:60},()=>({x:Math.random()*W,y:Math.random()*H*.5,r:Math.random()*1.5})):[];
+
+  let offset=0;
+  function drawFrame(){
+    ctx.clearRect(0,0,W,H);
+    offset+=1.2;
+
+    // sky gradient
+    const sky=ctx.createLinearGradient(0,0,0,H*.65);
+    sky.addColorStop(0,skyTop); sky.addColorStop(1,skyBot);
+    ctx.fillStyle=sky; ctx.fillRect(0,0,W,H*.65);
+
+    // stars
+    stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.8)';ctx.fill();});
+
+    // sun/moon
+    if(!isDark){
+      const sunX=W*.75, sunY=H*.12;
+      const sunG=ctx.createRadialGradient(sunX,sunY,2,sunX,sunY,22);
+      sunG.addColorStop(0,hr>=18?'#ffd700':'#fff7a1');sunG.addColorStop(1,'transparent');
+      ctx.fillStyle=sunG;ctx.beginPath();ctx.arc(sunX,sunY,22,0,Math.PI*2);ctx.fill();
+    } else {
+      ctx.fillStyle='rgba(255,255,220,.9)';ctx.beginPath();ctx.arc(W*.7,H*.12,10,0,Math.PI*2);ctx.fill();
+    }
+
+    // mountains (parallax slow)
+    mountains.forEach(m=>{
+      const mx=(m.x-offset*.1)%( W+60)-30;
+      ctx.beginPath();ctx.moveTo(mx,H*.65);ctx.lineTo(mx+40,H*.65-m.h);ctx.lineTo(mx+80,H*.65);ctx.closePath();
+      ctx.fillStyle=zone.type==='desert'?'#8b6537':'#374151';ctx.fill();
+    });
+
+    // ground
+    const grd=ctx.createLinearGradient(0,H*.62,0,H);
+    grd.addColorStop(0,zone.color);grd.addColorStop(1,isDark?'#050a0f':'#1a2e1a');
+    ctx.fillStyle=grd;ctx.fillRect(0,H*.62,W,H*.38);
+
+    // railroad ties (fast parallax)
+    for(let i=0;i<12;i++){
+      const tx=((i*70-offset*3)%(W+70))-35;
+      ctx.fillStyle='rgba(0,0,0,.4)';ctx.fillRect(tx,H*.72,40,5);
+    }
+    // rails
+    ctx.strokeStyle='#94a3b8';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(0,H*.74);ctx.lineTo(W,H*.74);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,H*.77);ctx.lineTo(W,H*.77);ctx.stroke();
+
+    // trees (medium parallax)
+    if(zoneName!=='desert'&&zoneName!=='city'&&zoneName!=='tunnel'){
+      trees.forEach(t=>{
+        const tx=(t.x-offset*2)%(W+60)-30;
+        ctx.fillStyle='#3d2b1a';ctx.fillRect(tx+t.h*.15,t.baseY,t.h*.1,t.h*.6);
+        if(t.type==='pine'){
+          ctx.beginPath();ctx.moveTo(tx,t.baseY);ctx.lineTo(tx+t.h*.5,t.baseY-t.h);ctx.lineTo(tx+t.h,t.baseY);ctx.closePath();
+          ctx.fillStyle=zone.accent;ctx.fill();
+        } else {
+          ctx.beginPath();ctx.arc(tx+t.h*.5,t.baseY-t.h*.4,t.h*.45,0,Math.PI*2);
+          ctx.fillStyle=zone.accent;ctx.fill();
+        }
+      });
+    }
+
+    // desert cacti
+    if(zoneName==='desert'){
+      trees.forEach(t=>{
+        const tx=(t.x-offset*2)%(W+60)-30;
+        ctx.fillStyle='#2d6a2d';
+        ctx.fillRect(tx+t.h*.4,t.baseY-t.h*.8,t.h*.2,t.h*.8);
+        ctx.fillRect(tx+t.h*.1,t.baseY-t.h*.5,t.h*.3,t.h*.1);
+        ctx.fillRect(tx+t.h*.6,t.baseY-t.h*.6,t.h*.3,t.h*.1);
+      });
+    }
+
+    // buildings for city
+    buildings.forEach(b=>{
+      const bx=(b.x-offset*2)%(W+80)-40;
+      ctx.fillStyle='#1e293b';ctx.fillRect(bx,H*.62-b.h,b.w,b.h);
+      // windows
+      for(let wy=H*.62-b.h+8;wy<H*.62-8;wy+=12){
+        for(let wx=bx+4;wx<bx+b.w-4;wx+=10){
+          ctx.fillStyle=Math.random()>.4?'rgba(255,220,100,.6)':'rgba(255,255,255,.1)';
+          ctx.fillRect(wx,wy,6,8);
+        }
+      }
+    });
+
+    // tunnel effect
+    if(zoneName==='tunnel'){
+      const tg=ctx.createRadialGradient(W/2,H/2,30,W/2,H/2,W*.6);
+      tg.addColorStop(0,'transparent');tg.addColorStop(1,'rgba(0,0,0,.9)');
+      ctx.fillStyle=tg;ctx.fillRect(0,0,W,H);
+    }
+
+    // window glass tint bottom fade
+    const fade=ctx.createLinearGradient(0,H*.5,0,H*.65);
+    fade.addColorStop(0,'transparent');fade.addColorStop(1,'rgba(10,14,26,.9)');
+    ctx.fillStyle=fade;ctx.fillRect(0,H*.5,W,H*.2);
+
+    _cabinAnim=requestAnimationFrame(drawFrame);
+  }
+  drawFrame();
+}
+
+function renderCockpit(){
+  const now=nowMins(),pr=getPrayers(),today=todayKey();
+  // next prayer
+  let nx=pr.find(p=>p.mins>now)||pr[0];
+  let diff=nx.mins-now;if(diff<0)diff+=1440;
+  const cdEl=el('cab-next-cd');if(cdEl)cdEl.textContent=toHMS(diff);
+  const nmEl=el('cab-next-name');if(nmEl)nmEl.textContent=nx.emoji+' '+nx.name;
+  // speed text fun
+  const speedEl=el('cabin-speed-txt');
+  if(speedEl){const spd=60+Math.floor(now/14);speedEl.textContent='⚡ '+spd+' كم/س';}
+  // progress
+  const todayTasks=STATE.tasks.filter(t=>(t.taskDate||today)===today);
+  const doneTasks=todayTasks.filter(t=>t.done).length;
+  const prayers=Object.keys(STATE.prayersDone).filter(k=>STATE.prayersDone[k]&&k!==QIYAM_KEY).length;
+  const allDone=doneTasks+prayers,allTotal=Math.max(1,todayTasks.length+5);
+  const pct=Math.round(allDone/allTotal*100);
+  const pEl=el('cab-pct');if(pEl)pEl.textContent=pct+'%';
+  const ring=el('cab-prog-ring');if(ring)ring.style.strokeDashoffset=(150.8*(1-pct/100)).toFixed(2);
+  // upcoming stations (prayers + tasks)
+  const stations=el('cab-stations');if(!stations)return;
+  stations.innerHTML='';
+  const upcoming=[...pr.filter(p=>p.mins>now),...todayTasks.filter(t=>!t.done&&toMins(t.from)>now)]
+    .sort((a,b)=>(a.mins||toMins(a.from))-(b.mins||toMins(b.from))).slice(0,5);
+  if(upcoming.length===0){stations.innerHTML='<div style="color:#475569;font-size:13px;padding:8px 0;">🎉 خلصت كل حاجة!</div>';return;}
+  upcoming.forEach(item=>{
+    const isPrayer=!!item.key;
+    const timeM=isPrayer?item.mins:toMins(item.from);
+    const d=timeM-now;
+    const div=document.createElement('div');
+    div.style.cssText='display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:8px 12px;';
+    div.innerHTML='<div style="display:flex;align-items:center;gap:8px;">'+
+      '<div style="width:8px;height:8px;border-radius:50%;background:'+(isPrayer?'#f59e0b':'#38bdf8')+'"></div>'+
+      '<span style="font-size:13px;font-weight:700;">'+(isPrayer?item.emoji+' ':'')+esc(isPrayer?item.name:item.name)+'</span></div>'+
+      '<span style="font-size:11px;color:'+(isPrayer?'#f59e0b':'#38bdf8')+';font-weight:700;">'+toHMS(d)+'</span>';
+    stations.appendChild(div);
+  });
+}
+
+/* ══ MAP CANVAS ══ */
+function openMapModal(){
+  el('map-overlay').style.display='flex';
+  setTimeout(drawMapCanvas,80);
+}
+function closeMapModal(){el('map-overlay').style.display='none';}
+
+function drawMapCanvas(){
+  const canvas=el('map-canvas');if(!canvas)return;
+  const dpr=window.devicePixelRatio||1;
+  const W=canvas.parentElement.clientWidth||360;
+  const pr=getPrayers(),today=todayKey(),now=nowMins();
+  const todayTasks=STATE.tasks.filter(t=>(t.taskDate||today)===today);
+
+  // build stops: prayers only for map
+  const stops=pr.map((p,i)=>({
+    label:p.emoji+' '+p.name, time:fmt12(p.time), mins:p.mins,
+    done:p.done, isPrayer:true,
+    tasks:todayTasks.filter(t=>toMins(t.from)>=p.mins&&(i+1<pr.length?toMins(t.from)<pr[i+1].mins:true))
+  }));
+
+  const STOP_H=110, PAD=24, TRACK_X=W*.18;
+  const H=stops.length*STOP_H+PAD*2;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  canvas.style.height=H+'px';
+  const ctx=canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+
+  // background
+  ctx.fillStyle='#0f172a'; ctx.fillRect(0,0,W,H);
+
+  // terrain strips between stops
+  const terrainColors=['#1a3a1a','#3a2a10','#1a2a3a','#2a1a3a','#1a3a2a','#3a1a10'];
+  stops.forEach((s,i)=>{
+    if(i<stops.length-1){
+      const y1=PAD+i*STOP_H+30, y2=PAD+(i+1)*STOP_H-10;
+      // terrain band
+      ctx.fillStyle=terrainColors[i%terrainColors.length];
+      ctx.fillRect(TRACK_X+14,y1,W-TRACK_X-30,y2-y1);
+      // terrain details
+      drawTerrainDecor(ctx,TRACK_X+20,y1,W-TRACK_X-40,y2-y1,i,W,now,s.mins,stops[i+1]?stops[i+1].mins:1440);
+    }
+  });
+
+  // main track line
+  const trackY1=PAD+15, trackY2=H-PAD-15;
+  ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(TRACK_X,trackY1);ctx.lineTo(TRACK_X,trackY2);ctx.stroke();
+
+  // done portion
+  const donePct=Math.min(now/1440,1);
+  const doneY=trackY1+(trackY2-trackY1)*donePct;
+  const dg=ctx.createLinearGradient(0,trackY1,0,doneY);
+  dg.addColorStop(0,'#10b981');dg.addColorStop(1,'#059669');
+  ctx.strokeStyle=dg; ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(TRACK_X,trackY1);ctx.lineTo(TRACK_X,doneY);ctx.stroke();
+
+  // rail ties
+  for(let ty=trackY1;ty<trackY2;ty+=18){
+    ctx.fillStyle='rgba(255,255,255,.07)';
+    ctx.fillRect(TRACK_X-8,ty,16,4);
+  }
+
+  // stops
+  stops.forEach((s,i)=>{
+    const cy=PAD+i*STOP_H+30;
+    const isCurrent=s.mins<=now&&(i+1>=stops.length||stops[i+1].mins>now);
+    const isDone=s.done||s.mins<now;
+
+    // dot
+    const dotR=isCurrent?14:10;
+    ctx.beginPath();ctx.arc(TRACK_X,cy,dotR,0,Math.PI*2);
+    ctx.fillStyle=isDone?'#10b981':isCurrent?'#f59e0b':'#1e293b';
+    ctx.fill();
+    ctx.strokeStyle=isDone?'#059669':isCurrent?'#fbbf24':'rgba(255,255,255,.2)';
+    ctx.lineWidth=isCurrent?3:2; ctx.stroke();
+    if(isCurrent){
+      ctx.beginPath();ctx.arc(TRACK_X,cy,dotR+5,0,Math.PI*2);
+      ctx.strokeStyle='rgba(245,158,11,.3)';ctx.lineWidth=2;ctx.stroke();
+    }
+    // emoji in dot
+    ctx.font=(isCurrent?'13px':'10px')+' serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(isDone?'✓':s.label.split(' ')[0],TRACK_X,cy);
+
+    // connector line to card
+    ctx.strokeStyle='rgba(255,255,255,.1)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(TRACK_X+dotR,cy);ctx.lineTo(TRACK_X+28,cy);ctx.stroke();
+
+    // card
+    const cx=TRACK_X+34, cardW=W-cx-PAD, cardH=s.tasks.length>0?70:48;
+    const cardY=cy-cardH/2;
+    ctx.fillStyle=isCurrent?'rgba(245,158,11,.1)':isDone?'rgba(16,185,129,.06)':'rgba(255,255,255,.04)';
+    ctx.strokeStyle=isCurrent?'rgba(245,158,11,.35)':isDone?'rgba(16,185,129,.2)':'rgba(255,255,255,.08)';
+    ctx.lineWidth=1;
+    roundRect(ctx,cx,cardY,cardW,cardH,10);ctx.fill();ctx.stroke();
+
+    ctx.fillStyle=isDone?'#6ee7b7':isCurrent?'#fde68a':'#e2e8f0';
+    ctx.font='bold 13px Tajawal,sans-serif';
+    ctx.textAlign='right'; ctx.textBaseline='top';
+    ctx.fillText(s.label,cx+cardW-10,cardY+10);
+
+    ctx.fillStyle='rgba(255,255,255,.4)';
+    ctx.font='11px Tajawal,sans-serif';
+    ctx.fillText(s.time,cx+cardW-10,cardY+28);
+
+    if(s.tasks.length>0){
+      const tdone=s.tasks.filter(t=>t.done).length;
+      ctx.fillStyle='#38bdf8';ctx.font='bold 11px Tajawal,sans-serif';
+      ctx.fillText('📋 '+tdone+'/'+s.tasks.length+' مهام',cx+cardW-10,cardY+46);
+    }
+  });
+
+  // train icon on track
+  const trainY=Math.min(doneY,trackY2-8);
+  ctx.font='20px serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('🚂',TRACK_X,trainY);
+}
+
+function drawTerrainDecor(ctx,x,y,w,h,idx,fullW,now,fromM,toM){
+  const types=['forest','desert','mountain','night','swamp','sunset'];
+  const t=types[idx%types.length];
+  // simple shapes per terrain
+  if(t==='forest'){
+    for(let i=0;i<5;i++){
+      const tx=x+i*(w/4)+10,ty=y+h*.7;
+      ctx.fillStyle='#1a5c2a';
+      ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx+8,ty-20);ctx.lineTo(tx+16,ty);ctx.closePath();ctx.fill();
+    }
+  } else if(t==='desert'){
+    ctx.fillStyle='#c8883a';
+    for(let i=0;i<3;i++){
+      ctx.beginPath();ctx.arc(x+i*(w/2)+20,y+h,30,Math.PI,0);ctx.fill();
+    }
+  } else if(t==='mountain'){
+    ctx.fillStyle='#374151';
+    ctx.beginPath();ctx.moveTo(x,y+h);ctx.lineTo(x+w*.4,y+4);ctx.lineTo(x+w*.8,y+h);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#f1f5f9';ctx.beginPath();ctx.moveTo(x+w*.4,y+4);ctx.lineTo(x+w*.32,y+h*.3);ctx.lineTo(x+w*.48,y+h*.3);ctx.closePath();ctx.fill();
+  } else if(t==='night'){
+    for(let i=0;i<8;i++){
+      ctx.fillStyle='rgba(255,255,255,.5)';
+      ctx.beginPath();ctx.arc(x+Math.random()*w,y+Math.random()*h*.6,.8+Math.random(),0,Math.PI*2);ctx.fill();
+    }
+  } else if(t==='swamp'){
+    ctx.fillStyle='rgba(20,80,20,.5)';ctx.fillRect(x,y+h*.6,w,h*.4);
+    ctx.fillStyle='#2d6a2d';
+    for(let i=0;i<4;i++)ctx.fillRect(x+i*(w/3),y+h*.4,6,h*.3);
+  } else if(t==='sunset'){
+    const sg=ctx.createLinearGradient(0,y,0,y+h);
+    sg.addColorStop(0,'rgba(255,120,0,.3)');sg.addColorStop(1,'transparent');
+    ctx.fillStyle=sg;ctx.fillRect(x,y,w,h);
+  }
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
+}
+
+/* ══ CELEBRATION + CONFETTI ══ */
+let _celebShown=false;
+function checkCelebration(){
+  const today=todayKey();
+  const todayTasks=STATE.tasks.filter(t=>(t.taskDate||today)===today);
+  if(todayTasks.length===0)return;
+  const allTasksDone=todayTasks.every(t=>t.done);
+  const allPrayersDone=Object.keys(STATE.prayersDone).filter(k=>STATE.prayersDone[k]&&k!==QIYAM_KEY).length>=5;
+  if(allTasksDone&&allPrayersDone&&!_celebShown){
+    _celebShown=true;
+    const streak=checkAndUpdateStreak();
+    updateStreakBadge();
+    el('celeb-streak').textContent=streak>1?'🔥 '+streak+' أيام متتالية!':'';
+    el('celeb-sub').textContent='أنهيت كل مهامك وصلواتك النهارده 🎉';
+    el('celebration').classList.add('open');
+    launchConfetti();
+  }
+}
+function closeCelebration(){
+  el('celebration').classList.remove('open');
+  stopConfetti();
+}
+let _confettiAnim=null;
+const CONFETTI_COLORS=['#f59e0b','#38bdf8','#10b981','#f472b6','#a78bfa','#fb923c'];
+function launchConfetti(){
+  const canvas=el('confetti-canvas');
+  const ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  const pieces=Array.from({length:80},()=>({
+    x:Math.random()*canvas.width,y:-10,
+    vx:(Math.random()-0.5)*4,vy:Math.random()*3+2,
+    color:CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)],
+    size:Math.random()*8+4,rot:Math.random()*360,vr:(Math.random()-0.5)*8,
+    life:1
+  }));
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.vy+=0.05;p.life-=0.005;
+      if(p.y>canvas.height){p.y=-10;p.x=Math.random()*canvas.width;p.life=1;}
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
+      ctx.globalAlpha=Math.max(0,p.life);
+      ctx.fillStyle=p.color;ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+      ctx.restore();
+    });
+    _confettiAnim=requestAnimationFrame(draw);
+  }
+  draw();
+}
+function stopConfetti(){
+  if(_confettiAnim){cancelAnimationFrame(_confettiAnim);_confettiAnim=null;}
+  const canvas=el('confetti-canvas');
+  if(canvas)canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+}
+
 /* ══ INIT ══ */
 loadState();
 applyTheme(STATE.bg||'bg-space',STATE.colorTheme||'theme-amber',STATE.neonIntensity||'normal');
 if(STATE.setup)showMain();else showSetup();
 setInterval(tick,1000);tick();
+startSmoke();
+updateStreakBadge();
 
 /* ══ PWA — كل حاجة inline في ملف واحد ══ */
 (function(){
@@ -1163,6 +1804,83 @@ window.addEventListener('appinstalled',()=>{
 
 })();
 </script>
+
+<!-- COCKPIT / CABIN VIEW -->
+<div id="cockpit-overlay" onclick="if(event.target===this)closeCockpit()" style="position:fixed;inset:0;z-index:500;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);">
+<div style="width:100%;max-width:480px;height:92vh;background:#0a0e1a;border-radius:28px 28px 0 0;overflow:hidden;display:flex;flex-direction:column;position:relative;border-top:1px solid rgba(255,255,255,.1);">
+
+  <!-- window scenery canvas -->
+  <canvas id="cabin-canvas" style="position:absolute;inset:0;width:100%;height:55%;"></canvas>
+
+  <!-- window frame overlay -->
+  <div style="position:absolute;top:0;left:0;right:0;height:55%;pointer-events:none;">
+    <!-- window border -->
+    <div style="position:absolute;inset:12px;border:4px solid #1e293b;border-radius:20px;box-shadow:inset 0 0 40px rgba(0,0,0,.5),0 0 0 2px #0f172a;"></div>
+    <!-- window reflection shine -->
+    <div style="position:absolute;top:20px;left:28px;width:30%;height:40%;background:linear-gradient(135deg,rgba(255,255,255,.06),transparent);border-radius:12px;pointer-events:none;"></div>
+    <!-- window pillars -->
+    <div style="position:absolute;top:0;left:0;bottom:0;width:14px;background:linear-gradient(90deg,#0f172a,#1e293b);"></div>
+    <div style="position:absolute;top:0;right:0;bottom:0;width:14px;background:linear-gradient(270deg,#0f172a,#1e293b);"></div>
+    <!-- speed overlay text -->
+    <div style="position:absolute;bottom:18px;right:26px;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:1px;" id="cabin-speed-txt">⚡ ٨٠ كم/س</div>
+  </div>
+
+  <!-- close btn -->
+  <button onclick="closeCockpit()" style="position:absolute;top:18px;right:18px;z-index:10;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+
+  <!-- dashboard panel -->
+  <div style="position:absolute;bottom:0;left:0;right:0;top:52%;background:linear-gradient(180deg,#0f172a,#080c18);border-top:3px solid #1e293b;padding:14px 16px 24px;overflow-y:auto;">
+
+    <!-- gauges row -->
+    <div style="display:flex;gap:10px;margin-bottom:14px;">
+      <!-- progress gauge -->
+      <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px;text-align:center;">
+        <div style="font-size:9px;color:#64748b;letter-spacing:2px;font-weight:700;margin-bottom:6px;">الإنجاز</div>
+        <div style="position:relative;width:60px;height:60px;margin:0 auto;">
+          <svg viewBox="0 0 60 60" width="60" height="60" style="transform:rotate(-90deg)">
+            <circle cx="30" cy="30" r="24" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="6"/>
+            <circle cx="30" cy="30" r="24" fill="none" stroke="url(#spgrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="150.8" id="cab-prog-ring" stroke-dashoffset="150.8"/>
+          </svg>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#f59e0b;" id="cab-pct">0%</div>
+        </div>
+      </div>
+      <!-- next station -->
+      <div style="flex:2;background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.25);border-radius:14px;padding:12px;">
+        <div style="font-size:9px;color:#f59e0b;letter-spacing:2px;font-weight:700;margin-bottom:6px;">المحطة القادمة</div>
+        <div style="font-size:15px;font-weight:900;" id="cab-next-name">—</div>
+        <div style="font-size:22px;font-weight:900;color:#f59e0b;letter-spacing:-1px;margin-top:2px;" id="cab-next-cd">--:--</div>
+      </div>
+    </div>
+
+    <!-- stations ticker / upcoming tasks -->
+    <div style="font-size:9px;color:#475569;letter-spacing:2px;font-weight:700;margin-bottom:8px;">🛤️ المحطات القادمة</div>
+    <div id="cab-stations" style="display:flex;flex-direction:column;gap:6px;"></div>
+  </div>
+</div>
+</div>
+
+<!-- MAP MODAL — SVG terrain map -->
+<div id="map-overlay" onclick="if(event.target===this)closeMapModal()" style="position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);">
+<div style="width:96%;max-width:480px;max-height:92vh;background:#0f172a;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.1);">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px 12px;border-bottom:1px solid rgba(255,255,255,.07);">
+    <div style="font-size:15px;font-weight:900;">🗺️ خريطة الرحلة</div>
+    <button onclick="closeMapModal()" style="background:none;border:none;color:#64748b;font-size:20px;cursor:pointer;">✕</button>
+  </div>
+  <div style="overflow:auto;flex:1;">
+    <canvas id="map-canvas" style="display:block;width:100%;"></canvas>
+  </div>
+</div>
+</div>
+
+<!-- CELEBRATION -->
+<canvas id="confetti-canvas"></canvas>
+<div id="celebration">
+  <div class="celeb-train">🚂</div>
+  <div class="celeb-title">وصلت المحطة! 🎉</div>
+  <div class="celeb-sub" id="celeb-sub">أنهيت كل مهامك وصلواتك النهارده</div>
+  <div class="celeb-streak" id="celeb-streak"></div>
+  <button class="celeb-close" onclick="closeCelebration()">ممتاز! 🚂</button>
+</div>
 
 <!-- ======= ADDITIONS: SHARE + OUR APPS ======= -->
 
